@@ -10,7 +10,7 @@ type Staff = {
     firstName: String,
     lastName: String,
     phone: String,
-    assetAssignmentHistory: Array<AssetAssignment>,
+    staffAssignmentHistory: Array<AssetAssignment>,
 }
 
 export {Staff};

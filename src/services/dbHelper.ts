@@ -27,7 +27,7 @@ const deleteDocument = async (collectionName: String, id: String) => {
 };
 
 const updateDocument = async (collectionName: String, id: String, updatedFields: JSON) => {
-    const documentRef = await db.collection('assets').doc(id);
+    const documentRef = await db.collection(collectionName).doc(id);
 
     // Probably want some sanity checks in here
     let document = await documentRef.get();
