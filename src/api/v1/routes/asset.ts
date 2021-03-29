@@ -1,5 +1,5 @@
 import {Router, Request, Response} from 'express';
-import {getAllAssetsValidator} from '../../../middleware/asset';
+import {getAllAssetValidator, patchAssetValidator, postAssetValidator} from '../../../middleware/asset';
 import 'joi';
 
 const addAssetRoutes = (router: Router) => {
@@ -8,7 +8,7 @@ const addAssetRoutes = (router: Router) => {
     // Retrieve all assets
     assetRouter.get(
         '/all',
-        getAllAssetsValidator,
+        getAllAssetValidator,
         (request: Request, response: Response) => {
             response.sendStatus(501);
         },
@@ -20,12 +20,13 @@ const addAssetRoutes = (router: Router) => {
     });
 
     // Add a new asset
-    assetRouter.post('/:assetId', (request: Request, response: Response) => {
-        response.sendStatus(501);
-    });
+    assetRouter.post(
+        '/:assetId', 
+        postAssetValidator,
+        (request: Request, response: Response) => {
+        
+        // Check date fields to ensure that they are in UTC format 
 
-    // Update asset details
-    assetRouter.put('/:assetId', (request: Request, response: Response) => {
         response.sendStatus(501);
     });
 
@@ -35,7 +36,10 @@ const addAssetRoutes = (router: Router) => {
     });
 
     // Update a single field of an asset
-    router.patch('/:assetId', (request: Request, response: Response) => {
+    router.patch(
+        '/:assetId', 
+        patchAssetValidator,
+        (request: Request, response: Response) => {
         response.sendStatus(501);
     });
 

@@ -1,14 +1,31 @@
 import {NextFunction, Request, Response} from 'express';
 import 'joi';
-import {getAllAssetsSchema} from '../api/v1/schemas/asset';
+import {getAllAssetSchema, patchAssetSchema, postAssetSchema} from '../api/v1/schemas/asset';
 import {validateRequest} from './helper';
 
-const getAllAssetsValidator = (
+const getAllAssetValidator = (
     request: Request,
     response: Response,
     next: NextFunction,
 ) => {
-    validateRequest(request, response, next, getAllAssetsSchema);
+    validateRequest(request, response, next, getAllAssetSchema);
 };
 
-export {getAllAssetsValidator};
+const postAssetValidator = (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+) => {
+    validateRequest(request, response, next, postAssetSchema);
+};
+
+const patchAssetValidator = (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+) => {
+    validateRequest(request, response, next, patchAssetSchema);
+};
+
+
+export {getAllAssetValidator, postAssetValidator, patchAssetValidator};
