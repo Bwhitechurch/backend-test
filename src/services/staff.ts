@@ -27,11 +27,8 @@ const getAllStaff = async (filterOptions) => {
             const filteredResultsOnType = [];
             for (const i in result) { // eslint-disable-line guard-for-in
                 // Only add results that match the type filter
-                console.log(result);
-
                 for (const j in result[i].assets) { // eslint-disable-line guard-for-in
                     if (result[i].assets[j].type == filterOptions.assetType) {
-                        console.log('ass');
                         filteredResultsOnType.push(result[i]);
                         break;
                     }
