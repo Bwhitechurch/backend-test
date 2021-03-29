@@ -22,7 +22,7 @@ const getAsset = async (assetId: string) => {
 const createAsset = async (assetData) => {
     const newAsset: Asset = {
         id: uuidv4(), // Generate a uuid for the created asset
-        active: assetData.active,
+        active: true,
         startTimestamp: (new Date()).getTime(),
         endTimestamp: null,
         status: assetData.status,

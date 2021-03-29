@@ -22,7 +22,7 @@ const getStaff = async (staffId: String) => {
 const createStaff = async (staffData) => {
     const newStaff: Staff = {
         id: uuidv4(), // Generate a uuid for the created staff
-        active: staffData.active,
+        active: true,
         admin: staffData.admin,
         email: staffData.email,
         startTimestamp: (new Date()).getTime(),

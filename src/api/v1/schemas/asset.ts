@@ -18,38 +18,13 @@ const postAssetSchema = Joi.object().keys({
     notes: Joi.string().required(),
     serial: Joi.string().required(),
     type: Joi.string().valid(...Object.values(AssetType)).required(),
-    staffAssignmentHistory: Joi.array().items(
-        Joi.object().keys({
-            active: Joi.boolean().required(),
-            startTimestamp: Joi.string().required(),
-            endTimestamp: Joi.string().required(),
-            staffId: Joi.string().required(),
-            firstName: Joi.string().required(),
-            lastName: Joi.string().required(),
-            reason: Joi.string().required(),
-        }),
-    ).required(),
 });
 
 const patchAssetSchema = Joi.object().keys({
-    active: Joi.boolean(),
-    startTimestamp: Joi.number(),
-    endTimestamp: Joi.number(),
     status: Joi.string().valid(...Object.values(AssetStatus)),
     notes: Joi.string(),
     serial: Joi.string(),
     type: Joi.string().valid(...Object.values(AssetType)),
-    staffAssignmentHistory: Joi.array().items(
-        Joi.object().keys({
-            active: Joi.boolean().required(),
-            startTimestamp: Joi.string().required(),
-            endTimestamp: Joi.string().required(),
-            staffId: Joi.string().required(),
-            firstName: Joi.string().required(),
-            lastName: Joi.string().required(),
-            reason: Joi.string().required(),
-        }),
-    ),
 });
 
 export {getAllAssetSchema, postAssetSchema, patchAssetSchema};
