@@ -13,3 +13,5 @@ type StaffAssignment = {
     lastName: String,
     reason: AssetAssignmentEndReason,
 }
+
+export {AssetAssignmentEndReason, StaffAssignment};

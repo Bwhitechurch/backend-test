@@ -1,4 +1,4 @@
-import '../types/staffAssignment';
+import {StaffAssignment} from '../types/staffAssignment';
 
 enum AssetType {
     PHONE,
@@ -14,6 +14,12 @@ enum AssetType {
     USB,
 }
 
+enum AssetStatus {
+    NONE,
+    LOST,
+    STOLEN,
+}
+
 type Asset = {
     active: Boolean,
     startdate: String,
@@ -26,4 +32,4 @@ type Asset = {
     staffAssignmentHistory: Array<StaffAssignment>,
 }
 
-export default AssetType;
+export {AssetType, AssetStatus};

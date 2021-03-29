@@ -1,4 +1,5 @@
-import AssetType from '../models/asset';
+import {AssetType} from '../models/asset';
+import {AssetAssignmentEndReason} from './staffAssignment';
 
 type AssetAssignment = {
     active: Boolean,
@@ -9,4 +10,4 @@ type AssetAssignment = {
     type: AssetType,
 }
 
-export default AssetAssignment;
+export {AssetAssignment};

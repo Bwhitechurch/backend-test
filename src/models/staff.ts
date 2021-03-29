@@ -1,4 +1,4 @@
-import AssetAssignment from '../types/assetAssignment';
+import {AssetAssignment} from '../types/assetAssignment';
 
 type Staff = {
     active: Boolean,
