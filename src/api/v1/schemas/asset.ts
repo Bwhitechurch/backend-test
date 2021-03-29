@@ -14,8 +14,6 @@ const getAllAssetSchema = Joi.object().keys({
 
 const postAssetSchema = Joi.object().keys({
     active: Joi.boolean().required(),
-    startdate: Joi.string().required(),
-    endDate: Joi.string().required(),
     status: Joi.string().valid(...Object.values(AssetStatus)).required(),
     notes: Joi.string().required(),
     serial: Joi.string().required(),
@@ -23,8 +21,8 @@ const postAssetSchema = Joi.object().keys({
     staffAssignmentHistory: Joi.array().items(
         Joi.object().keys({
             active: Joi.boolean().required(),
-            startDate: Joi.string().required(),
-            endDate: Joi.string().required(),
+            startTimestamp: Joi.string().required(),
+            endTimestamp: Joi.string().required(),
             staffId: Joi.string().required(),
             firstName: Joi.string().required(),
             lastName: Joi.string().required(),
@@ -35,8 +33,8 @@ const postAssetSchema = Joi.object().keys({
 
 const patchAssetSchema = Joi.object().keys({
     active: Joi.boolean(),
-    startdate: Joi.string(),
-    endDate: Joi.string(),
+    startTimestamp: Joi.number(),
+    endTimestamp: Joi.number(),
     status: Joi.string().valid(...Object.values(AssetStatus)),
     notes: Joi.string(),
     serial: Joi.string(),
@@ -44,8 +42,8 @@ const patchAssetSchema = Joi.object().keys({
     staffAssignmentHistory: Joi.array().items(
         Joi.object().keys({
             active: Joi.boolean().required(),
-            startDate: Joi.string().required(),
-            endDate: Joi.string().required(),
+            startTimestamp: Joi.string().required(),
+            endTimestamp: Joi.string().required(),
             staffId: Joi.string().required(),
             firstName: Joi.string().required(),
             lastName: Joi.string().required(),

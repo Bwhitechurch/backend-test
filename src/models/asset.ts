@@ -1,4 +1,5 @@
 import {StaffAssignment} from '../types/staffAssignment';
+import {db} from '../config/firebase';
 
 enum AssetType {
     PHONE = "phone",
@@ -21,14 +22,15 @@ enum AssetStatus {
 }
 
 type Asset = {
-    active: Boolean,
-    startdate: String,
-    endDate: String,
-    status: AssetStatus,
-    notes: String,
-    serial: String,
-    type: AssetType
-    staffAssignmentHistory: Array<StaffAssignment>,
+    id: String,
+    active: Boolean;
+    startTimestamp: number;
+    endTimestamp: number;
+    status: AssetStatus;
+    notes: String;
+    serial: String;
+    type: AssetType;
+    staffAssignmentHistory: Array<StaffAssignment>;
 }
 
-export {AssetType, AssetStatus};
+export {Asset, AssetType, AssetStatus};

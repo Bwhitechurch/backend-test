@@ -5,6 +5,7 @@ type AssetAssignment = {
     assignedDate: String,
     unassignedDate: String,
     assetId: String,
+    staffId: String,
     reason: AssetStatus,
     type: AssetType,
 }
