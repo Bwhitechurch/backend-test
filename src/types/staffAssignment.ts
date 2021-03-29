@@ -1,4 +1,4 @@
-import { AssetStatus } from "../models/asset";
+import {AssetStatus} from '../models/asset';
 
 type StaffAssignment = {
     active: Boolean

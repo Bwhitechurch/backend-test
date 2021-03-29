@@ -1,5 +1,5 @@
-import Joi from "joi";
-import { AssetType, AssetStatus } from "../../../models/asset";
+import Joi from 'joi';
+import {AssetType, AssetStatus} from '../../../models/asset';
 
 const getAllAssetSchema = Joi.object().keys({
     filterOptions: Joi.object().keys({
@@ -27,7 +27,7 @@ const postAssetSchema = Joi.object().keys({
             firstName: Joi.string().required(),
             lastName: Joi.string().required(),
             reason: Joi.string().required(),
-        })
+        }),
     ).required(),
 });
 
@@ -48,7 +48,7 @@ const patchAssetSchema = Joi.object().keys({
             firstName: Joi.string().required(),
             lastName: Joi.string().required(),
             reason: Joi.string().required(),
-        })
+        }),
     ),
 });
 

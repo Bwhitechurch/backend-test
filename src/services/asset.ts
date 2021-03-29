@@ -1,15 +1,15 @@
-import {Asset} from '../models/asset'
-import {db} from '../config/firebase'
+import {Asset} from '../models/asset';
+import {db} from '../config/firebase';
 import {v4 as uuidv4} from 'uuid';
-import { deleteDocument, getDocument, updateDocument } from './dbHelper';
+import {deleteDocument, getDocument, updateDocument} from './dbHelper';
 
 const getAllAssets = async (filterOptions) => {
     if (filterOptions != null) {
-        //TODO
+        // TODO
     } else {
         const result = await db.collection('assets').get();
         return result.docs.map((asset) => {
-            return { id: asset.id, ...asset.data() }
+            return {id: asset.id, ...asset.data()};
         });
     }
 };
@@ -17,7 +17,7 @@ const getAllAssets = async (filterOptions) => {
 const getAsset = async (assetId: string) => {
     const result = await getDocument('assets', assetId);
     return result;
-}; 
+};
 
 const createAsset = async (assetData) => {
     const newAsset: Asset = {
@@ -30,9 +30,9 @@ const createAsset = async (assetData) => {
         serial: assetData.serial,
         type: assetData.type,
         staffAssignmentHistory: assetData.staffAssignmentHistory,
-      };
+    };
 
-    // Need some basic validation here 
+    // Need some basic validation here
 
     await db.collection('assets').doc(newAsset.id).set(newAsset);
     return newAsset;

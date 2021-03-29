@@ -23,52 +23,52 @@ const addAssetRoutes = (router: Router) => {
             response.status(200).json(result).send();
         } else {
             response.status(400).json({
-                'error': 'Asset with id ' + request.params.assetId + ' does not exist'
+                'error': 'Asset with id ' + request.params.assetId + ' does not exist',
             }).send();
         }
     });
 
     // Add a new asset
     assetRouter.post(
-        '/', 
+        '/',
         postAssetValidator,
         async (request: Request, response: Response) => {
-        const result = await createAsset(request.body);
-        if (result != null) {
-            response.status(200).json(result).send();
-        } else {
-            response.status(400).json({
-                'error': 'Asset could not be created'
-            }).send();
-        }
-    });
+            const result = await createAsset(request.body);
+            if (result != null) {
+                response.status(200).json(result).send();
+            } else {
+                response.status(400).json({
+                    'error': 'Asset could not be created',
+                }).send();
+            }
+        });
 
     // Soft delete an asset
     assetRouter.delete('/:assetId', async (request: Request, response: Response) => {
         const result = await deleteAsset(request.params.assetId);
-        if(result != null) {
+        if (result != null) {
             response.status(200).json(result).send();
         } else {
             response.status(400).json({
-                'error': 'Asset with id ' + request.params.assetId + ' does not exist'
+                'error': 'Asset with id ' + request.params.assetId + ' does not exist',
             }).send();
         };
     });
 
     // Update a single field of an asset
     assetRouter.patch(
-        '/:assetId', 
+        '/:assetId',
         patchAssetValidator,
         async (request: Request, response: Response) => {
             const result = await updateAsset(request.params.assetId, request.body);
-            if(result != null) {
+            if (result != null) {
                 response.status(200).json(result).send();
             } else {
                 response.status(400).json({
-                    'error': 'Asset with id ' + request.params.assetId + ' does not exist'
+                    'error': 'Asset with id ' + request.params.assetId + ' does not exist',
                 }).send();
             };
-        }
+        },
     );
 
     router.use('/asset', assetRouter);

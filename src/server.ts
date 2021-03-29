@@ -9,7 +9,7 @@ const startServer = () => {
 
     const bodyParser = require('body-parser');
     server.use(bodyParser.json());
-    server.use(bodyParser.urlencoded({ extended: true }));
+    server.use(bodyParser.urlencoded({extended: true}));
     apiV1(server);
 
     server.listen(port, hostname, () => {
