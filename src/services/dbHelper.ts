@@ -1,0 +1,33 @@
+
+import {db} from '../config/firebase';
+
+const getDocument = async (collectionName: String, id: String) => {
+    const document = await db.collection(collectionName).doc(id).get();
+    if (document.exists) {
+        return document.data();
+    } else {
+        return null;
+    }
+}
+
+const deleteDocument = async (collectionName: String, id: String) => {
+    const documentRef = await db.collection(collectionName).doc(id);
+    
+    let document = await documentRef.get();
+    if (document.exists) {
+        await documentRef.update({
+            active: false,
+            endTimestamp: (new Date()).getTime()
+        });
+        document = await documentRef.get();
+        return document.data();
+    } else {
+        return null;
+    }
+}
+
+const updateDocument = async (collectionName: String, id: String, updatedFields: JSON) => {
+
+}
+
+export {getDocument, deleteDocument, updateDocument};
