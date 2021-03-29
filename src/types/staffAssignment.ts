@@ -1,8 +1,4 @@
-enum AssetAssignmentEndReason {
-    STOLEN,
-    LOST,
-    RETURNED,
-}
+import { AssetStatus } from "../models/asset";
 
 type StaffAssignment = {
     active: Boolean
@@ -11,7 +7,7 @@ type StaffAssignment = {
     staffId: String,
     firstName: String,
     lastName: String,
-    reason: AssetAssignmentEndReason,
+    reason: AssetStatus,
 }
 
-export {AssetAssignmentEndReason, StaffAssignment};
+export {StaffAssignment};

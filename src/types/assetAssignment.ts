@@ -1,12 +1,11 @@
-import {AssetType} from '../models/asset';
-import {AssetAssignmentEndReason} from './staffAssignment';
+import {AssetStatus, AssetType} from '../models/asset';
 
 type AssetAssignment = {
     active: Boolean,
     assignedDate: String,
     unassignedDate: String,
     assetId: String,
-    reason: AssetAssignmentEndReason,
+    reason: AssetStatus,
     type: AssetType,
 }
 
