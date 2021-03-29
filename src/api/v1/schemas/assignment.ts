@@ -7,9 +7,9 @@ const postAssignmentSchema = Joi.object().keys({
 });
 
 const deleteAssignmentSchema = Joi.object().keys({
-    staffId: Joi.string(),
-    assetId: Joi.string(),
-    reason: Joi.string().valid(...Object.values(AssetStatus)),
+    staffId: Joi.string().required(),
+    assetId: Joi.string().required(),
+    reason: Joi.string().valid(...Object.values(AssetStatus)).required(),
 });
 
 export {deleteAssignmentSchema, postAssignmentSchema};

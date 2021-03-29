@@ -15,7 +15,7 @@ const addAssignmentRoutes = (router: Router) => {
                 response.status(200).json({'status': 'Assignment successfully created'}).send();
             } else {
                 response.status(400).json({
-                    'error': 'Assignment could not be created, as the asset is already assigned to a staff member',
+                    'error': 'Assignment could not be created',
                 }).send();
             }
         });
@@ -25,13 +25,15 @@ const addAssignmentRoutes = (router: Router) => {
         '/',
         deleteAssignmentValidator,
         async (request: Request, response: Response) => {
-            const result = await deleteAssignment(request.body.staffId, request.body.assetId);
-            if (result != null) {
-                response.status(200).json(result).send();
+            const result = await deleteAssignment(request.body.staffId, request.body.assetId, request.body.reason);
+            if (result) {
+                response.status(200).json({
+                    'status': 'Assignment successfully deleted',
+                }).send();
             } else {
                 response.status(400).json({
                     'error': 'Assignment between staff ' +
-                    request.params.staffId + ' and asset ' + request.params.assetId +
+                    request.body.staffId + ' and asset ' + request.body.assetId +
                     ' does not exist',
                 }).send();
             };

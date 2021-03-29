@@ -1,4 +1,5 @@
 import {db} from '../config/firebase';
+import {AssetStatus} from '../models/asset';
 
 const createAssignment = async (staffId: String, assetId: String): Promise<boolean> => {
     // Check that asset is not already assigned
@@ -8,8 +9,14 @@ const createAssignment = async (staffId: String, assetId: String): Promise<boole
     const staffRef = await db.collection('staff').doc(staffId);
     const staff = await staffRef.get();
 
+    // If one of the objects does not exist, the assignment can't be created
+    if (!staff.exists || !asset.exists) {
+        return false;
+    }
+
+
     const staffAssigned = asset.data().staff;
-    if (staffAssigned.find((assignment) => assignment.active == true)) {
+    if (staffAssigned.find((assignment) => assignment.active)) {
         return false;
     }
 
@@ -25,8 +32,6 @@ const createAssignment = async (staffId: String, assetId: String): Promise<boole
         lastName: staff.data().lastName,
         reason: null,
     });
-
-    console.log(staffAssigned);
 
     await assetRef.update({
         staff: staffAssigned,
@@ -50,19 +55,62 @@ const createAssignment = async (staffId: String, assetId: String): Promise<boole
     return true;
 };
 
-const deleteAssignment = async (staffId: String, assetId: String): Promise<boolean> => {
+const deleteAssignment = async (staffId: String, assetId: String, reason: AssetStatus): Promise<boolean> => {
     // Check that assignment actually exists
     const assetRef = await db.collection('assets').doc(assetId);
-    const asset = assetRef.get().data();
+    const asset = await assetRef.get();
 
     const staffRef = await db.collection('staff').doc(staffId);
-    const staff = staffRef.get().data();
+    const staff = await staffRef.get();
 
-    console.log(asset);
-    console.log(staff);
+    // If one of the objects does not exist, the assignment can't exist
+    if (!staff.exists || !asset.exists) {
+        return false;
+    }
 
+    // Check that assignment exists - if it does not then return early
+    const dateUnassignedTimestamp = (new Date()).getTime();
+    const staffAssigned = asset.data().staff;
 
-    return false;
+    let assignmentExists = false;
+    for (const i in staffAssigned) { // eslint-disable-line guard-for-in
+        const assignment = staffAssigned[i];
+        if (assignment.staffId == staffId && assignment.active) {
+            assignmentExists = true;
+            assignment.unassignedTimestamp = dateUnassignedTimestamp;
+            assignment.active = false;
+            assignment.reason = reason;
+            staffAssigned[i] = assignment;
+            break;
+        }
+    }
+
+    if (!assignmentExists) {
+        return false;
+    }
+
+    await assetRef.update({
+        staff: staffAssigned,
+    });
+
+    // Delete from staff as well
+    const assetsAssigned = staff.data().assets;
+    for (const i in assetsAssigned) { // eslint-disable-line guard-for-in
+        const assignment = staffAssigned[i];
+        if (assignment.staffId == staffId && assignment.active) {
+            assignment.unassignedTimestamp = dateUnassignedTimestamp;
+            assignment.active = false;
+            assignment.reason = reason;
+            assetsAssigned[i] = assignment;
+            break;
+        }
+    }
+
+    await staffRef.update({
+        assets: assetsAssigned,
+    });
+
+    return true;
 };
 
 export {createAssignment, deleteAssignment};
