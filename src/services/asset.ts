@@ -29,7 +29,7 @@ const createAsset = async (assetData) => {
         notes: assetData.notes,
         serial: assetData.serial,
         type: assetData.type,
-        staffAssignmentHistory: assetData.staffAssignmentHistory,
+        staff: [],
     };
 
     // Need some basic validation here

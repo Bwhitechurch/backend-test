@@ -30,7 +30,7 @@ const createStaff = async (staffData) => {
         firstName: staffData.firstName,
         lastName: staffData.lastName,
         phone: staffData.phone,
-        staffAssignmentHistory: staffData.staffAssignmentHistory,
+        assets: [],
     };
 
     await db.collection('staff').doc(newStaff.id).set(newStaff);

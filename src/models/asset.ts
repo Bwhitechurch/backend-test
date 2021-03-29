@@ -1,4 +1,4 @@
-import {StaffAssignment} from '../types/staffAssignment';
+import {AssetAssignmentOnAsset} from '../types/assetAssignment';
 
 enum AssetType {
     PHONE = 'phone',
@@ -22,14 +22,14 @@ enum AssetStatus {
 
 type Asset = {
     id: String,
-    active: Boolean;
-    startTimestamp: number;
-    endTimestamp: number;
-    status: AssetStatus;
-    notes: String;
-    serial: String;
-    type: AssetType;
-    staffAssignmentHistory: Array<StaffAssignment>;
+    active: Boolean,
+    startTimestamp: number,
+    endTimestamp: number,
+    status: AssetStatus,
+    notes: String,
+    serial: String,
+    type: AssetType,
+    staff: Array<AssetAssignmentOnAsset>,
 }
 
 export {Asset, AssetType, AssetStatus};

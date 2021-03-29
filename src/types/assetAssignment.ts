@@ -1,13 +1,13 @@
-import {AssetStatus, AssetType} from '../models/asset';
+import {AssetStatus} from '../models/asset';
 
-type AssetAssignment = {
+type AssetAssignmentOnAsset = {
     active: Boolean,
-    assignedDate: String,
-    unassignedDate: String,
-    assetId: String,
+    assignedTimestamp: number,
+    unassignedTimestamp: number,
     staffId: String,
+    firstName: String,
+    lastName: String,
     reason: AssetStatus,
-    type: AssetType,
 }
 
-export {AssetAssignment};
+export {AssetAssignmentOnAsset};

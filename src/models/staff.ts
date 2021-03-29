@@ -1,4 +1,4 @@
-import {AssetAssignment} from '../types/assetAssignment';
+import {AssetAssignmentOnStaff} from '../types/staffAssignment';
 
 type Staff = {
     id: String,
@@ -10,7 +10,7 @@ type Staff = {
     firstName: String,
     lastName: String,
     phone: String,
-    staffAssignmentHistory: Array<AssetAssignment>,
+    assets: Array<AssetAssignmentOnStaff>,
 }
 
 export {Staff};

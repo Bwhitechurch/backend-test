@@ -15,7 +15,7 @@ const getAllAssetSchema = Joi.object().keys({
 const postAssetSchema = Joi.object().keys({
     active: Joi.boolean().required(),
     status: Joi.string().valid(...Object.values(AssetStatus)).required(),
-    notes: Joi.string().required(),
+    notes: Joi.string().required().allow(''),
     serial: Joi.string().required(),
     type: Joi.string().valid(...Object.values(AssetType)).required(),
 });
